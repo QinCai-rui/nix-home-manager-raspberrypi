@@ -45,6 +45,8 @@
     pkgs.fastfetch
     pkgs.iotop
     pkgs.wavemon
+
+    pkgs.pbzip2
     # End System Tools
 
     # Start Nix Specific
@@ -58,6 +60,7 @@
     pkgs.cloudflared
     pkgs.bun
     #pkgs.docker	# off for now (couln't get it working as systemd service)
+    pkgs.sshx
     # End Server Software
 
     # Start Version Control
