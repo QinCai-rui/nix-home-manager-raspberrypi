@@ -64,6 +64,10 @@
     pkgs.gh
     pkgs.git
     # End Version Control
+
+    # Start Local ML
+    pkgs.ollama
+    # End Local ML
   ];
 
   programs.bash = {
