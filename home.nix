@@ -58,6 +58,7 @@
     pkgs.cloudflared
     pkgs.bun
     #pkgs.docker	# off for now (couln't get it working as systemd service)
+    # End Server Software
 
     # Start Version Control
     pkgs.gh
