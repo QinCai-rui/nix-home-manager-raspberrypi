@@ -75,8 +75,8 @@
 
   programs.bash = {
     enable = true;
-    #    bashrcExtra = "${config.home.homeDirectory}/.bashrc.pios";
-    initExtra = "source ${config.home.homeDirectory}/.bashrc.pios";
+    #    bashrcExtra = "${config.home.homeDirectory}/.config/home-manager/.bashrc.old";
+    initExtra = "source ${config.home.homeDirectory}/.config/home-manager/.bashrc.old";
   };
 
   programs.bash.shellAliases = {
