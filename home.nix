@@ -71,6 +71,11 @@
     # Start Local ML
     pkgs.ollama
     # End Local ML
+
+    # Start Other
+#    pkgs.clang
+    pkgs.sysbench
+    # End Other
   ];
 
   programs.bash = {
