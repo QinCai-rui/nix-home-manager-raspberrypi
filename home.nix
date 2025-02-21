@@ -19,6 +19,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nix.package = pkgs.nix;
+  nix.settings.experimental-features = ["nix-command"];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
