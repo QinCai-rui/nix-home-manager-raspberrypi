@@ -20,7 +20,7 @@
   nixpkgs.config.allowUnfree = true;
 
   nix.package = pkgs.nix;
-  nix.settings.experimental-features = ["nix-command"];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -55,12 +55,12 @@
     # Start Nix Specific
     pkgs.nix-output-monitor
     pkgs.alejandra
-    #pkgs.nh            #off for now (couldn't get non-flake working)
+#    pkgs.nh            #off for now (couldn't get non-flake working)
     # End Nix Specific
 
     # Start Server Software
     pkgs.tailscale
-    pkgs.cloudflared
+#    pkgs.cloudflared
     pkgs.bun
     #pkgs.docker	# off for now (couln't get it working as systemd service)
     pkgs.sshx
@@ -72,16 +72,24 @@
     # End Version Control
 
     # Start Local ML
-    pkgs.ollama
+#    pkgs.ollama
     # End Local ML
 
     # Start Other
 #    pkgs.clang
     pkgs.sysbench
+#    pkgs.geekbench
+    pkgs.ookla-speedtest
+    pkgs.stress
+#    pkgs.stress-ng
+    pkgs.s-tui
+    pkgs.fish
     # End Other
   ];
 
   programs.bash = {
+
+
     enable = true;
     #    bashrcExtra = "${config.home.homeDirectory}/.config/home-manager/.bashrc.old";
     initExtra = "source ${config.home.homeDirectory}/.config/home-manager/.bashrc.old";
