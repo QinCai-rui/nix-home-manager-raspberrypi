@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  unstablePkgs = import <nix-unstable> {};
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "qincai";
@@ -19,8 +21,12 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.package = pkgs.nix;
+  #nix.package = pkgs.nix;
+  
+  # Use nix from nix-unstable
+  nix.package = unstablePkgs.nix;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  targets.genericLinux.enable = true;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -46,7 +52,7 @@
     pkgs.btop
     pkgs.ncdu
     pkgs.fastfetch
-    pkgs.iotop
+#    pkgs.iotop
     pkgs.wavemon
 
     pkgs.pbzip2
@@ -82,8 +88,8 @@
     pkgs.ookla-speedtest
     pkgs.stress
 #    pkgs.stress-ng
-    pkgs.s-tui
-    pkgs.fish
+#    pkgs.s-tui
+#    pkgs.fish
     # End Other
   ];
 
