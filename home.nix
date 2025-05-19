@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  unstablePkgs = import <nix-unstable> {};
+  unstablePkgs = import <nixpkgs> {};
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -25,12 +25,12 @@ in {
   
   # Use nix from nix-unstable
   nix.package = unstablePkgs.nix;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+#  nix.settings.experimental-features = ["nix-command" "flakes"];
   targets.genericLinux.enable = true;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with unstablePkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -49,56 +49,58 @@ in {
     # '')
 
     # Start System Tools
-    pkgs.btop
-    pkgs.ncdu
-    pkgs.fastfetch
-#    pkgs.iotop
-    pkgs.wavemon
-
-    pkgs.pbzip2
+    btop
+    tree
+    ncdu
+    fastfetch
+    iotop
+    wavemon
+#    nvtop
+#    pbzip2
     # End System Tools
 
     # Start Nix Specific
-    pkgs.nix-output-monitor
-    pkgs.alejandra
-#    pkgs.nh            #off for now (couldn't get non-flake working)
+    nix-output-monitor
+#    alejandra
+#    nh            #off for now (couldn't get non-flake working)
     # End Nix Specific
 
     # Start Server Software
-    pkgs.tailscale
-#    pkgs.cloudflared
-    pkgs.bun
-    #pkgs.docker	# off for now (couln't get it working as systemd service)
-    pkgs.sshx
+#    tailscale
+#    cloudflared
+    bun
+    #docker	# off for now (couln't get it working as systemd service)
+#    sshx
+    croc
+#    nodejs_23
     # End Server Software
 
     # Start Version Control
-    pkgs.gh
-    pkgs.git
+    gh
+    git
     # End Version Control
 
     # Start Local ML
-#    pkgs.ollama
+#    ollama
     # End Local ML
 
     # Start Other
-#    pkgs.clang
-    pkgs.sysbench
-#    pkgs.geekbench
-    pkgs.ookla-speedtest
-    pkgs.stress
-#    pkgs.stress-ng
-#    pkgs.s-tui
-#    pkgs.fish
+#    clang
+#    sysbench
+#    geekbench
+    ookla-speedtest
+    stress
+#    stress-ng
+#    s-tui
+#    fish
+    util-linux
     # End Other
   ];
 
   programs.bash = {
-
-
     enable = true;
     #    bashrcExtra = "${config.home.homeDirectory}/.config/home-manager/.bashrc.old";
-    initExtra = "source ${config.home.homeDirectory}/.config/home-manager/.bashrc.old";
+    initExtra = "source ${config.home.homeDirectory}/.config/home-manager/.bashrc.old && source ${config.home.homeDirectory}/.ps1";
   };
 
   programs.bash.shellAliases = {
@@ -108,6 +110,9 @@ in {
     "hm-rebuild" = "home-manager switch |& nom";
     "hm-edit" = "home-manager edit";
     "nix-update" = "nix-channel --update -vvv";
+    "pihole" = "docker exec -it pihole pihole";
+    "deb" = "nala";
+
     # End Custom
 
     # Start RPi OS
